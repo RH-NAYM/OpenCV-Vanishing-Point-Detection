@@ -1,6 +1,6 @@
 # 💡 Histogram Equalization in OpenCV (Python Tutorial)
 ---
-[![dev branch](https://img.shields.io/badge/branch-dev-red?style=flat&logo=git&logoColor=white)](https://github.com/RH-NAYM/OpenCV-Vanishing-Point-Detection/tree/dev)
+[![main branch](https://img.shields.io/badge/branch-main-red?style=flat&logo=git&logoColor=white)](https://github.com/RH-NAYM/OpenCV-Vanishing-Point-Detection/tree/main)
 #
 
 <p align="center">
