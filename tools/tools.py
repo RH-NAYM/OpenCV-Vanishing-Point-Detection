@@ -106,7 +106,7 @@ class LearnTools:
         ax.axis("off")
 
 
-    def show_multiple_images(self, image_plotting_data=None, images_per_row=2):
+    def show_multiple_images(self, image_plotting_data=None, images_per_row=3):
         """
         Display multiple images dynamically from a list of dictionaries.
 
