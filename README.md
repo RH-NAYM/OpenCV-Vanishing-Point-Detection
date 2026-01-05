@@ -1,6 +1,6 @@
 # 💡 Vanishing Point Detection in OpenCV **Canny + Hough Transform + RANSAC** (Python Tutorial)
 ---
-[![dev branch](https://img.shields.io/badge/branch-dev-red?style=flat&logo=git&logoColor=white)](https://github.com/RH-NAYM/OpenCV-Vanishing-Point-Detection/tree/dev)
+[![dev branch](https://img.shields.io/badge/branch-dev-red?style=flat&logo=git&logoColor=white)](https://github.com/RH-NAYM/OpenCV-Vanishing-Point-Detection.ipynb/tree/dev)
 #
 <p align="center">
   <a href="https://opencv.org/" target="_blank">
@@ -24,12 +24,12 @@
 
 # 📌 Overview
 
-This project demonstrates a **classical computer vision pipeline** for detecting **vanishing points** in images with strong perspective (roads, corridors, railways, architecture, etc.).
+This project demonstrates a `classical computer vision pipeline` for detecting `vanishing points` in images with strong perspective (`roads`, `corridors`, `railways`, `architecture` etc.).
 
-The method combines three fundamental techniques:
-1. **Canny** edge detection
-2. **Probabilistic Hough Transform** for line segment detection
-3. **RANSAC** for robust estimation of the vanishing point from noisy line intersections
+**The method combines three fundamental techniques:**
+1. `Canny` edge detection
+2. `Probabilistic Hough Transform` for line segment detection
+3. `RANSAC` for robust estimation of the vanishing point from noisy line intersections
 
 Despite being a non-deep-learning approach, this pipeline remains very useful in 2025 for:
 - interpretable results
@@ -43,12 +43,12 @@ Despite being a non-deep-learning approach, this pipeline remains very useful in
 
 ```bash
 .
-├── 📓 Vanishing-Point-Detection.ipynb       # Main notebook with full pipeline
-├── 📘 README.md                             # This file
-├── 📦 requirements.txt                      # Python dependencies
-├── 🖼️ road.jpg                              # Example test image (or download your own)
-└── 🛠️ tools                                 # (optional) Utility functions
-    └── tools.py                             # Image loading & visualization helpers
+├── 📓 OpenCV-Vanishing-Point-Detection.ipynb       # Main notebook with full pipeline
+├── 📘 README.md                                    # This file
+├── 📦 requirements.txt                             # Python dependencies
+├── 🖼️ testImage.jpg                                # Example test image (or download your own)
+└── 🛠️ tools                                        # (optional) Utility functions
+    └── tools.py                                    # Image loading & visualization helpers
 ```
 
 # 📋 Table of Contents (Notebook Sections)
@@ -71,13 +71,13 @@ Despite being a non-deep-learning approach, this pipeline remains very useful in
 - Why edge quality dramatically affects the final result
 - How to tune Canny thresholds for different scene types
 - Most important Hough parameters and their impact
-- How RANSAC handles noisy and outlier lines
+- How `RANSAC` handles noisy and outlier lines
 - Practical strategies when the vanishing point is outside the image
 
 # 🛠️ Technologies Used
 ---
 - `Python 3.x`
-- `OpenCV` for morphological image processing
+- `OpenCV` for Vanishing Point Detection
 - `NumPy` for array operations
 - `Matplotlib` for visualization
 - `Jupyter Notebook` for interactive experimentation
@@ -100,53 +100,49 @@ pip install -r requirements.txt
 **Option 1: Jupyter Notebook (Local)**
 - Install Jupyter if needed: `pip install notebook`.
 - Launch Jupyter: `jupyter notebook`.
-- Open `OpenCV-Vanishing-Point-Detection` and run cells sequentially.
+- Open `OpenCV-Vanishing-Point-Detection.ipynb` and run cells sequentially.
     - Notebook will automatically download a placeholder image if testImage.jpg is missing.
 
 
 **Option 2: Google Colab**
-- Upload `OpenCV-Vanishing-Point-Detection` to Colab.
+- Upload `OpenCV-Vanishing-Point-Detection.ipynb` to Colab.
 - Install dependencies: `!pip install -r requirements.txt`.
 - Run all cells for interactive demonstrations.
 
 Tip: The notebook works best with images containing strong perspective lines
-(roads, railways, long corridors, buildings with parallel lines).
-Recommended test images:
+(`roads`, `railways`, `long corridors`, `buildings` with parallel lines).
+**Recommended test images:**
 - Highway / road perspective
 - Train tracks
 - Building interiors with long hallways
 - City streets with tall buildings
 
 
+# ✅ Quick Parameter Tuning Reference
+- `Stage`,`Parameter`,`Typical Range`                   ::  Advice / When to change
+- `Canny`,`low/high threshold`,`50–120 / 120–250`       ::  Increase both in noisy images, decrease in low-contrast
+- `Canny`,`apertureSize`,`3` / `5`                      ::  `5` for thicker, more continuous edges
+- `HoughP`,`threshold`,`60–150`                         ::  Higher = fewer but more confident lines
+- `HoughP`,`minLineLength`,`60–200`                     ::  Increase to remove short fragments
+- `HoughP`,`maxLineGap`,`8–30`                          ::  Higher = connects broken lines better
+- `RANSAC`,`inlier threshold (px)`,`3–10`               ::  Higher tolerance for noisy scenes
+- `RANSAC`,`iterations`,`800–3000`                      ::  More iterations = higher chance to find good model
 
-✅ Quick Parameter Tuning Reference
+# 🍴 Real-World Applications (still relevant in 2025)
+- `Lane detection` initialization in autonomous driving
+- Camera `self-calibration` / `focal length` estimation
+- `Augmented Reality` marker-less `tracking` initialization
+- `Architectural analysis` & `rectification`
+- `Robotics` — `corridor` / `hallway navigation`
+- Low-compute fallback method when deep models are not available
 
-Stage,Parameter,Typical Range,Advice / When to change
-Canny,low/high threshold,50–120 / 120–250,"Increase both in noisy images, decrease in low-contrast"
-Canny,apertureSize,3 / 5,"5 for thicker, more continuous edges"
-HoughP,threshold,60–150,Higher = fewer but more confident lines
-HoughP,minLineLength,60–200,Increase to remove short fragments
-HoughP,maxLineGap,8–30,Higher = connects broken lines better
-RANSAC,inlier threshold (px),3–10,Higher tolerance for noisy scenes
-RANSAC,iterations,800–3000,More iterations = higher chance to find good model
+# 📝 Possible Improvements & Next Steps
+- Line clustering by angle → detect multiple vanishing points (_Manhattan world_)
+- Use `LSD` (_Line Segment Detector_) instead of Hough
+- Add weighted `RANSAC` (_longer lines = more important_)
+- Filter lines by orientation before `RANSAC`
+- Post-processing refine VP with least-squares on inliers
 
-🍴 Real-World Applications (still relevant in 2025)
-
-Lane detection initialization in autonomous driving
-Camera self-calibration / focal length estimation
-Augmented Reality marker-less tracking initialization
-Architectural analysis & rectification
-Robotics — corridor / hallway navigation
-Low-compute fallback method when deep models are not available
-
-📝 Possible Improvements & Next Steps
-
-Line clustering by angle → detect multiple vanishing points (Manhattan world)
-Use LSD (Line Segment Detector) instead of Hough
-Add weighted RANSAC (longer lines = more important)
-Filter lines by orientation before RANSAC
-Post-processing: refine VP with least-squares on inliers
-
-📌 Final Note
-Even in the era of deep learning-based methods (DeepVP, HorizonNet, etc.),
-the Canny + Hough + RANSAC pipeline remains one of the most interpretable, fast and resource-efficient solutions for many real-world perspective geometry tasks.
+# 📌 Final Note
+Even in the era of deep learning-based methods (_DeepVP, HorizonNet, etc._),
+the `Canny` + `Hough` + `RANSAC` pipeline remains one of the most interpretable, fast and resource-efficient solutions for many real-world perspective geometry tasks.
